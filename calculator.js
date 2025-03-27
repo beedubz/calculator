@@ -31,6 +31,12 @@ const operate = function(valA, valB, operator) { //performs calculator function
 
 
 function operatorClick() {
+    const newlyClickedOperator = this.id;
+    if (currentOperation === true) {
+        storedOperator = newlyClickedOperator;
+        return;
+    }
+
     const currentDisplayValue = display.textContent;    
     
     if (storedOperator !== null && a !== null) {
