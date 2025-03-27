@@ -120,27 +120,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-        
-
-
-    //when operator is pushed and a is null, display content becomes a
-    //when operator is pushed and a is not null, display content becomes b and operation is made
-    //when clear is pushed a and b become null
-/*
-    (a === '') { //if no number has been entered that number is entered into a
-        a = display.textContent;
-    }
-    else if (a != '' && b === '') { //if one numbers have been entered the second is b
-        b = display.textContent;
-    }
-    else { //if a and b both have values then we operate on them
-        const result = operate(a, b, this.id);
-        display.textContent = result; //display the result of the calculation
-        if (typeof result === "number") {
-        a = result; //store the result in a
-        b = ''; //b becomes null
-        currentOperation = true; //clears display if new number entered }
-        }
-    }
-*/
