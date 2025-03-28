@@ -3,6 +3,7 @@ let b = null;
 let currentOperation = false;
 let storedOperator = null;
 let display;
+let equalsPushed = false;
 
 
 const operate = function(valA, valB, operator) { //performs calculator function
@@ -87,6 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
                   numbutton.addEventListener('click', function() {
                     if (currentOperation) { //if there's an ongoing operation clear the display for the second number 
                         display.textContent = '';
+                        if (storedOperator === null) {
+                            console.log("Starting fresh calculation after equals/clear, resetting a."); // Optional debug log
+                            a = null // Reset 'a' to start fresh
+                        }
                         currentOperation = false; //allows multiple numbers appearing
                     }
                     if (this.textContent === '.' && display.textContent.includes('.')) {
@@ -95,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (display.textContent === '0' && this.textContent !== '.') {
                         display.textContent = ''; // Clear the '0'
                     }
+                    
                     display.textContent += this.textContent;
                 });
             });
@@ -120,9 +126,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // Do nothing if no operator or first number is stored
             return;
         }
-        else {
-        operatorClick();
-        storedOperator = null;
+        b = display.textContent;
+        const result = operate(a, b, storedOperator)
+        let isError = false;
+        if (result === "No can do Pepe Le Pieu!") {
+            isError = true;
+        } 
+        if (typeof result !== 'number' || isNaN(result)) {
+            display.textContent = typeof result === 'string' ? result : "Error";
+                isError = true;
+            }
+            if (typeof result === 'string') {
+                errorMessage = result; // e.g., "No can do...", "Error: Invalid Operator"
+           }
+        if (isError) {
+            a = null; b = null; storedOperator = null; currentOperation = false;
+            return;
         }
-    });
+        display.textContent = parseFloat(result.toFixed(3));
+        a = result;
+        b = null;
+        storedOperator = null;
+        currentOperation = true
+        });
 });
